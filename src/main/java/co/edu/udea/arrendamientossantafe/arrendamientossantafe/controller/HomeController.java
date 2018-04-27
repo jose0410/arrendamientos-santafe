@@ -30,7 +30,7 @@ public class HomeController {
         startDate = format.format(home.getCheckIn());
         endDate = format.format(home.getCheckOut());
         //format.parse(startDate),format.parse(endDate)
-        return homeRepository.findHomesByDate(home.getCheckIn(),home.getCheckOut());
+        return homeRepository.findHomesByDate(new Date(home.getCheckIn().toString()),new Date(home.getCheckOut().toString()));
         //return null;
     }
 }

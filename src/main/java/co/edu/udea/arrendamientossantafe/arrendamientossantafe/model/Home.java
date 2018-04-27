@@ -13,23 +13,19 @@ import java.util.Hashtable;
 @Entity
 @Table(name = "home")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
 public class Home {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private int id;
 
     private String name, description, city, type, rating, totalAmount, pricePerNight, thumbnail;
 
     //private Hashtable<String,String> location;
 
-    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.DATE)
     @CreatedDate
     private Date checkIn;
-    @Column(nullable = false, updatable = false)
+
     @Temporal(TemporalType.DATE)
     @CreatedDate
     private Date checkOut;
