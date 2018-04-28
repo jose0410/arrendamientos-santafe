@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface HomeRepository extends JpaRepository<Home,Long> {
 
-    @Query(value = "SELECT * FROM home WHERE home.checkIn BETWEEN ?1 AND ?2", nativeQuery = true)
-    List<Home> findHomesByDate(Date checkIn, Date checkOut);
+
 }

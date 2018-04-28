@@ -21,16 +21,11 @@ public class HomeController {
     @Autowired
     HomeRepository homeRepository;
 
-    private String startDate, endDate;
-    private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-
     @PostMapping("/search")
-    public List<Home> getAllHomes(@Valid @RequestBody Home home){
+    public List<Home> getAllHomes(){
 
-        startDate = format.format(home.getCheckIn());
-        endDate = format.format(home.getCheckOut());
-        //format.parse(startDate),format.parse(endDate)
-        return homeRepository.findHomesByDate(new Date(home.getCheckIn().toString()),new Date(home.getCheckOut().toString()));
-        //return null;
+        return homeRepository.findAll();
     }
+
+
 }
