@@ -19,8 +19,8 @@ public class Booking {
     @JoinColumn(name="home")
     private Home idHome;
 
-    private Date checkIn;
-    private Date checkOut;
+    private String checkIn;
+    private String checkOut;
 
     public int getId() {
         return id;
@@ -29,18 +29,18 @@ public class Booking {
         this.id = id;
 
     }
-    public Date getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
-    public Date getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 }
