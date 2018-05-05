@@ -48,12 +48,10 @@ public class HomeController {
       // } catch (ParseException e) {
       //   e.printStackTrace();
       // }
-      System.out.println(obj.getString("checkIn"));
-      System.out.println(obj.getString("checkOut"));
       // System.out.println(checkOut);
       City city = cityRepository.searchCity(obj.getString("city"));
       Type type = typeRepository.searchType(obj.getInt("type"));
 
-      return homeRepository.searchHome(obj.getString("checkIn"),obj.getString("checkOut"), type, city);
+      return homeRepository.searchHome(obj.getString("checkIn"),obj.getString("checkOut") ,type, city);
     }
 }
