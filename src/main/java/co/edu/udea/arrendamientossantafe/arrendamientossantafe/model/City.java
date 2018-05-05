@@ -31,6 +31,4 @@ public class City {
         this.id = id;
 
     }
-
-
 }
