@@ -52,7 +52,6 @@ public class HomeController {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
         LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
-
         LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
 
         obj.put("checkIn",checkInDate.toString());
