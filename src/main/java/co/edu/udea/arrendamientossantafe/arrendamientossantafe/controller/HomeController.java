@@ -9,15 +9,15 @@ import co.edu.udea.arrendamientossantafe.arrendamientossantafe.repository.HomeRe
 import co.edu.udea.arrendamientossantafe.arrendamientossantafe.repository.BookingRepository;
 import co.edu.udea.arrendamientossantafe.arrendamientossantafe.repository.CityRepository;
 import co.edu.udea.arrendamientossantafe.arrendamientossantafe.repository.TypeRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 import org.json.*;
+
+import static java.lang.Integer.parseInt;
 
 
 @RestController
@@ -32,26 +32,19 @@ public class HomeController {
     CityRepository cityRepository;
     @Autowired
     TypeRepository typeRepository;
+
     // "checkIn": "07-04-2018",
     // "checkOut": "10-04-2018",
     // "city": "CO-MDE",
     // "type": "1"DAte checkIn
     @PostMapping("/search")
-    public List<Home> getAllHomes(@RequestBody String search){
-      JSONObject obj = new JSONObject(search);
-      // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-      // Date checkIn = null;
-      // Date checkOut = null;
-      // try {
-      //   checkIn = formatter.parse(obj.getString("checkIn"));
-      //   checkOut =  formatter.parse(obj.getString("checkOut"));
-      // } catch (ParseException e) {
-      //   e.printStackTrace();
-      // }
-      // System.out.println(checkOut);
-      City city = cityRepository.searchCity(obj.getString("city"));
-      Type type = typeRepository.searchType(obj.getInt("type"));
+    public List<Home> getAllHomes(@RequestBody String search) throws JsonProcessingException {
 
-      return homeRepository.searchHome(obj.getString("checkIn"),obj.getString("checkOut") ,type, city);
+        JSONObject obj = new JSONObject(search);
+        City city = cityRepository.searchCity(obj.getString("city"));
+        Type type = typeRepository.searchType(parseInt(obj.getString("type")));
+        List<Home> homes = homeRepository.searchHome(obj.getString("checkIn"), obj.getString("checkOut"), type, city);
+
+        return homes;
     }
 }

@@ -19,19 +19,18 @@ public class Home {
     private String name;
     private String description;
 
-    private String address;
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = Location.class)
+    @JoinColumn(name="location")
+    private Location location;
 
-    private double latitude;
+    private Double raiting;
+    private String totalAmount;
 
-    private double longitude;
-
-
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = City.class)
     @JoinColumn(name="city")
     private City city;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = Type.class)
     @JoinColumn(name="type")
     private Type type;
 
@@ -61,30 +60,6 @@ public class Home {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
     }
 
     public City getCity() {
@@ -117,5 +92,37 @@ public class Home {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Double getRaiting() {
+        return raiting;
+    }
+
+    public void setRaiting(Double raiting) {
+        this.raiting = raiting;
+    }
+
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public double getPrice_per_night() {
+        return price_per_night;
+    }
+
+    public void setPrice_per_night(double price_per_night) {
+        this.price_per_night = price_per_night;
     }
 }

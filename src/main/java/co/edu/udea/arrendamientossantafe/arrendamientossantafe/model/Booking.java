@@ -15,7 +15,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Home.class)
     @JoinColumn(name="home")
     private Home idHome;
 
