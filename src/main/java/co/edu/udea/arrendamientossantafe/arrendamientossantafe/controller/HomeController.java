@@ -13,6 +13,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import org.json.*;
@@ -38,9 +43,21 @@ public class HomeController {
     // "city": "CO-MDE",
     // "type": "1"DAte checkIn
     @PostMapping("/search")
-    public List<Home> getAllHomes(@RequestBody String search) throws JsonProcessingException {
+    public List<Home> getAllHomes(@RequestBody String search) throws JsonProcessingException, ParseException {
 
         JSONObject obj = new JSONObject(search);
+
+        String initialDate = obj.getString("checkIn");
+        String endDate = obj.getString("checkOut");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
+        LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
+
+        LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
+
+        obj.put("checkIn",checkInDate.toString());
+        obj.put("checkOut",checkOutDate.toString());
+
         City city = cityRepository.searchCity(obj.getString("city"));
         Type type = typeRepository.searchType(parseInt(obj.getString("type")));
         List<Home> homes = homeRepository.searchHome(obj.getString("checkIn"), obj.getString("checkOut"), type, city);

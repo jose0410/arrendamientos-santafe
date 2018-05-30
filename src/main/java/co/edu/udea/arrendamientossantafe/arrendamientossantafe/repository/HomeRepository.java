@@ -13,6 +13,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface HomeRepository extends JpaRepository<Home,Long> {
-  @Query("select h from home as h where h.city = :city and h.type = :type and NOT exists(select home from booking as b where h.id = b.home and ((:check_in between check_in and check_out) or (:check_in between check_in and check_out)))")
+  @Query("select h from Home as h where h.city = :city and h.type = :type and NOT exists(select idHome from Booking as b where h.id = b.idHome and ((:check_in between check_in and check_out) or (:check_out between check_in and check_out)))")
   List<Home> searchHome(@Param("check_in") String check_in ,@Param("check_out") String check_out,@Param("type") Type type, @Param("city") City city);
 }
