@@ -1,6 +1,7 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
 
 public class SimpleBooking {
+
     private long bookingId;
     private String checkIn;
     private String checkOut;

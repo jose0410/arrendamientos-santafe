@@ -10,5 +10,5 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Query("select b from Booking as b where b.user = :user")
     List<Booking> getAllByUser(@Param("user") String user);
-    
+
 }

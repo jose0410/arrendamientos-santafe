@@ -79,20 +79,10 @@ public class HomeController {
         return res;
     }
 
-    @PostMapping("/booking")
-    public void bookingHome(@RequestBody String booking) throws JsonProcessingException, ParseException {
-        JSONObject obj = new JSONObject(booking);
-        System.out.println(obj.toString());
-        String initialDate = obj.getString("checkIn");
-        String endDate = obj.getString("checkOut");
-        int id = Integer.parseInt(obj.getString("id"));
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
-        LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
-        LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
-    }
     
-    @PostMapping("/removeBooking")
+
+    
+    @DeleteMapping("/removeBooking")
     public Remove removeBooking(@RequestBody String bookingid, @RequestHeader("token") String token) throws IOException  {
     	if (!firebaseUp) {
             initFirebase();
@@ -127,6 +117,43 @@ public class HomeController {
     	remove=new Remove(agency, code, message);        
     	return remove;
     }
+    
+    @PostMapping("/booking")
+    public NewBookingResponse bookingHome(@RequestBody String booking, @RequestHeader("token") String token) throws JsonProcessingException, ParseException,IOException, FirebaseAuthException {
+      if (!firebaseUp) {
+          initFirebase();
+      }
+      FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
+      String uid = decodedToken.getUid();
+      JSONObject obj = new JSONObject(booking);
+      String initialDate = obj.getString("checkIn");
+      String endDate = obj.getString("checkOut");
+      int id = Integer.parseInt(obj.getString("id"));
+
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
+      LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
+      LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
+      Agency agency = new Agency("1234-1123-1234", "Arrendamientos Santa Fé", "Arrendamientos Santa Fé");
+      Home home = homeRepository.getHome(id);
+      int code;
+      String message;
+      try{
+        Booking res = new Booking();
+        res.setIdHome(home);
+        res.setCheckIn(checkInDate.toString());
+        res.setCheckOut(checkOutDate.toString());
+        res.setUser(uid);
+        res = bookingRepository.save(res);
+        code = 1;
+        message = "Success";
+      } catch (Exception e) {
+        code = 1;
+        message = e.toString();
+      }
+      NewBookingResponse response = new NewBookingResponse(agency, message, code);
+      return response;
+  }
+
 
     @PostMapping("/myBooking")
     public BookingResponse myBooking(@RequestHeader("token") String token) throws IOException, FirebaseAuthException {
@@ -188,5 +215,6 @@ public class HomeController {
                 .build();
         FirebaseApp.initializeApp(options);
         firebaseUp = true;
+
     }
 }
