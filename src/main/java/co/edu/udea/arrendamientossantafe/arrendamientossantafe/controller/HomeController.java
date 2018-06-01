@@ -85,5 +85,6 @@ public class HomeController {
       LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
       LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
 
+      
     }
 }
