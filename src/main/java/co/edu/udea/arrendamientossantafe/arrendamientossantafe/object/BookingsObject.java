@@ -1,9 +1,10 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
+import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Booking;
 import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Location;
 
 import java.util.List;
 
-public class Home2 {
+public class BookingsObject {
     private int id;
 
     private String name;
@@ -16,21 +17,8 @@ public class Home2 {
     private String type;
 
     private double price_per_night;
-
     private String thumbnail;
-
-    public Home2(int id, String name, String description, Location location, Double raiting, String totalAmount, String city, String type, Double price_per_night, String thumbnail){
-      this.id = id;
-      this.name = name;
-      this.description = description;
-      this.location = location;
-      this.raiting = raiting;
-      this.totalAmount = totalAmount;
-      this.city = city;
-      this.type = type;
-      this.price_per_night = price_per_night;
-      this.thumbnail = thumbnail;
-    }
+    private List<SimpleBooking> booking;
 
     public int getId() {
         return id;
@@ -119,4 +107,13 @@ public class Home2 {
     public void setPrice_per_night(double price_per_night) {
         this.price_per_night = price_per_night;
     }
+
+    public List<SimpleBooking> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<SimpleBooking> booking) {
+        this.booking = booking;
+    }
+
 }
