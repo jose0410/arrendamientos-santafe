@@ -1,34 +1,26 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
-import java.util.Date;
-import java.util.*;
+import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Booking;
+import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Location;
+
+import java.util.List;
 
 public class BookingResponse {
-  private Agency agency;
-  private String message;
-  private int code;
+    private Agency agency;
+    private List<BookingsObject> homes;
 
-  public BookingResponse(Agency agency, String message,){
-    this.message = message;
-    this.agency = agency;
-    this.code = code;
-  }
+    public Agency getAgency() {
+        return agency;
+    }
 
-  public String getMessage() {
-    return message;
-  }
-  public void setMessage(String message){
-    this.message = message;
-  }
-  public String getCode() {
-    return code;
-  }
-  public void setCode(int code){
-    this.code = code;
-  }
-  public Agency getAgency() {
-    return agency;
-  }
-  public void setAgency(Agency agency){
-    this.agency = agency;
-  }
+    public void setAgency(Agency agency) {
+        this.agency = agency;
+    }
+
+    public List<BookingsObject> getHomes() {
+        return homes;
+    }
+
+    public void setHomes(List<BookingsObject> homes) {
+        this.homes = homes;
+    }
 }
