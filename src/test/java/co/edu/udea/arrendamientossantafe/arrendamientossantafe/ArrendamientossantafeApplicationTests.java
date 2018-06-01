@@ -1,5 +1,6 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe;
 
+import com.sun.deploy.net.HttpResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,11 @@ public class ArrendamientossantafeApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	}
+
+	@Test
+	public void shouldgetAllHomes() {
+
 	}
 
 }

@@ -46,7 +46,7 @@ public class HomeController {
     // "city": "CO-MDE",
     // "type": "1"DAte checkIn
     @PostMapping("/search")
-    public Search getAllHomes(@RequestBody String search) throws JsonProcessingException, ParseException {
+    public Object getAllHomes(@RequestBody String search) throws JsonProcessingException, ParseException {
 
         JSONObject obj = new JSONObject(search);
 
@@ -60,17 +60,24 @@ public class HomeController {
         obj.put("checkIn",checkInDate.toString());
         obj.put("checkOut",checkOutDate.toString());
 
-        City city = cityRepository.searchCity(obj.getString("city"));
-        Type type = typeRepository.searchType(parseInt(obj.getString("type")));
-        List<Home> homes = homeRepository.searchHome(obj.getString("checkIn"), obj.getString("checkOut"), type, city);
-        List<Home2> homes2 = new ArrayList<Home2>();
-        for(Home i: homes){
-          Home2 aux = new Home2(i.getId(), i.getName(), i.getDescription(), i.getLocation(), i.getRaiting(), i.getTotalAmount(), i.getCity().getName(), i.getType().getName(), i.getPricePerNight(), i.getThumbnail());
-          homes2.add(aux);
+        if(checkInDate.isBefore(checkOutDate)) {
+
+            City city = cityRepository.searchCity(obj.getString("city"));
+            Type type = typeRepository.searchType(parseInt(obj.getString("type")));
+            List<Home> homes = homeRepository.searchHome(obj.getString("checkIn"), obj.getString("checkOut"), type, city);
+            List<Home2> homes2 = new ArrayList<Home2>();
+            for (Home i : homes) {
+                Home2 aux = new Home2(i.getId(), i.getName(), i.getDescription(), i.getLocation(), i.getRaiting(), i.getTotalAmount(), i.getCity().getName(), i.getType().getName(), i.getPricePerNight(), i.getThumbnail());
+                homes2.add(aux);
+            }
+            Agency agency = new Agency("1234-1123-1234", "Arrendamientos Santa Fé", "Arrendamientos Santa Fé");
+            Search res = new Search(agency, homes2);
+            return res;
+        }else{
+            JSONObject res = new JSONObject();
+            res.put("Error","La fecha de partida no puede ser anterior a la fecha de llegada!");
+            return res.toString();
         }
-        Agency agency = new Agency("1234-1123-1234", "Arrendamientos Santa Fé", "Arrendamientos Santa Fé");
-        Search res = new Search(agency, homes2);
-        return res;
     }
 
     @PostMapping("/booking")
