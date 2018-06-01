@@ -1,42 +1,24 @@
-package co.edu.udea.arrendamientossantafe.arrendamientossantafe.model;
+package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
+import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Booking;
+import co.edu.udea.arrendamientossantafe.arrendamientossantafe.model.Location;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
-
-
-@Entity
-@Table(name = "home")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Home {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class BookingsObject {
     private int id;
 
     private String name;
     private String description;
-
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Location.class)
-    @JoinColumn(name="location")
     private Location location;
 
     private Double raiting;
     private String totalAmount;
-
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = City.class)
-    @JoinColumn(name="city")
-    private City city;
-
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Type.class)
-    @JoinColumn(name="type")
-    private Type type;
+    private String city;
+    private String type;
 
     private double price_per_night;
-
     private String thumbnail;
+    private List<SimpleBooking> booking;
 
     public int getId() {
         return id;
@@ -62,19 +44,19 @@ public class Home {
         this.description = description;
     }
 
-    public City getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -125,4 +107,13 @@ public class Home {
     public void setPrice_per_night(double price_per_night) {
         this.price_per_night = price_per_night;
     }
+
+    public List<SimpleBooking> getBooking() {
+        return booking;
+    }
+
+    public void setBooking(List<SimpleBooking> booking) {
+        this.booking = booking;
+    }
+
 }
