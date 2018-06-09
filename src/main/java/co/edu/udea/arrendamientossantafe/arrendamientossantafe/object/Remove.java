@@ -1,35 +1,38 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
 
 
-
 public class Remove {
-	  private int code;
-	  private String message;
-	  private Agency agency;
+    private int codigo;
+    private String mensaje;
+    private Agency agency;
 
-	  public Remove(Agency agency, int code, String message){
-	    this.code=code;
-	    this.message=message;
-	    this.agency = agency;
-	  }
-	  public int getCode() {
-		  return this.code;
-	  }
-	  public String getMessage() {
-		  return this.message;
-	  }
-	  public void setCode(int code) {
-		  this.code=code;
-	  }
-	  public void setMessage(String message) {
-		  this.message=message;
-	  }
-	  
-	  
-	  public Agency getAgency() {
-	    return agency;
-	  }
-	  public void setAgency(Agency agency){
-	    this.agency = agency;
-	  }
-	}
+    public Remove(Agency agency, int code, String message) {
+        this.codigo = code;
+        this.mensaje = message;
+        this.agency = agency;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public Agency getAgency() {
+        return agency;
+    }
+
+    public void setAgency(Agency agency) {
+        this.agency = agency;
+    }
+}
