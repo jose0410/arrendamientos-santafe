@@ -128,8 +128,8 @@ public class HomeController {
         LocalDate checkOutDate = LocalDate.parse(endDate, formatter);
         Agency agency = new Agency("1234-1123-1234", "Arrendamientos Santa Fé", "Arrendamientos Santa Fé");
         Home home = homeRepository.getHome(id);
-        int code;
-        String message;
+        int codigo;
+        String mensaje;
         try {
             Booking res = new Booking();
             res.setIdHome(home);
@@ -137,13 +137,13 @@ public class HomeController {
             res.setCheckOut(checkOutDate.toString());
             res.setUser(uid);
             res = bookingRepository.save(res);
-            code = 1;
-            message = "Success";
+            codigo = 1;
+            mensaje = "Success";
         } catch (Exception e) {
-            code = 1;
-            message = e.toString();
+            codigo = 1;
+            mensaje = e.toString();
         }
-        NewBookingResponse response = new NewBookingResponse(agency, message, code);
+        NewBookingResponse response = new NewBookingResponse(agency, mensaje, codigo);
         return response;
     }
 

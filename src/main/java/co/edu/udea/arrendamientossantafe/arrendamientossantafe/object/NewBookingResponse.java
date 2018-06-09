@@ -1,34 +1,40 @@
 package co.edu.udea.arrendamientossantafe.arrendamientossantafe.object;
+
 import java.util.Date;
 import java.util.*;
 
 public class NewBookingResponse {
-  private Agency agency;
-  private String message;
-  private int code;
+    private Agency agency;
+    private String mensaje;
+    private int codigo;
 
-  public NewBookingResponse(Agency agency, String message,int code){
-    this.message = message;
-    this.agency = agency;
-    this.code = code;
-  }
+    public NewBookingResponse(Agency agency, String message, int code) {
+        this.mensaje = message;
+        this.agency = agency;
+        this.codigo = code;
+    }
 
-  public String getMessage() {
-    return message;
-  }
-  public void setMessage(String message){
-    this.message = message;
-  }
-  public int getCode() {
-    return code;
-  }
-  public void setCode(int code){
-    this.code = code;
-  }
-  public Agency getAgency() {
-    return agency;
-  }
-  public void setAgency(Agency agency){
-    this.agency = agency;
-  }
+    public Agency getAgency() {
+        return agency;
+    }
+
+    public void setAgency(Agency agency) {
+        this.agency = agency;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 }
