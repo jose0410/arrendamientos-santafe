@@ -1,0 +1,1 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0e98ab6b8bd04fdf84211cacac2014ae)](https://www.codacy.com/app/jose0410/arrendamientos-santafe?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jose0410/arrendamientos-santafe&amp;utm_campaign=Badge_Grade)
