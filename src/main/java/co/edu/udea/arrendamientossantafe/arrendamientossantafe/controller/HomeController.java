@@ -99,7 +99,7 @@ public class HomeController {
 
         }
         JSONObject obj = new JSONObject(bookingid);
-        long id = Long.parseLong(obj.getString("bookingId"));
+        long id = obj.getLong("bookingId");
 
 
         if (bookingRepository.existsById(id)) {
