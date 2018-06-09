@@ -11,6 +11,7 @@ public class ArrendamientossantafeApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }

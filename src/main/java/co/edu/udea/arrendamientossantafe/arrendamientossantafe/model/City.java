@@ -10,6 +10,7 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class City {
+
     @Id
     private String id;
 
