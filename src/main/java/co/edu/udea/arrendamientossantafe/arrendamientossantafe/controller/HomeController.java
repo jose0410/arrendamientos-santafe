@@ -121,7 +121,7 @@ public class HomeController {
         JSONObject obj = new JSONObject(booking);
         String initialDate = obj.getString("checkIn");
         String endDate = obj.getString("checkOut");
-        int id = Integer.parseInt(obj.getString("id"));
+        int id = obj.getInt("id");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
         LocalDate checkInDate = LocalDate.parse(initialDate, formatter);
