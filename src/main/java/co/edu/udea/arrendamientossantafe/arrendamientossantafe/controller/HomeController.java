@@ -82,14 +82,17 @@ public class HomeController {
 
     @DeleteMapping("/removeBooking")
     public Remove removeBooking(@RequestBody String bookingid, @RequestHeader("token") String token) throws IOException {
+        if (!firebaseUp) {
+            initFirebase();
+        }
         int code;
         String message = "";
         Remove remove;
         try {
-            validateFirebase(token);
+            FirebaseAuth.getInstance().verifyIdToken(token);
         } catch (Exception e) {
             code = 0;
-            message = "Your booking could not be eliminated";
+            message = "Your booking could not be elminated";
             Agency agency = new Agency("1234-1123-1234", "Arrendamientos Santa Fé", "Arrendamientos Santa Fé");
             remove = new Remove(agency, code, message);
             return remove;
@@ -215,7 +218,12 @@ public class HomeController {
         if (!firebaseUp) {
             initFirebase();
         }
-        FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
-        return decodedToken.getUid();
+        try {
+            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
+            return decodedToken.getUid();
+        } catch (Exception e) {
+
+        }
+        return "";
     }
 }

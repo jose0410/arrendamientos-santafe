@@ -71,7 +71,7 @@ public class HomeControllerTest {
         when(homeRepository.searchHome(Mockito.any(String.class), Mockito.any(String.class), Mockito.any(Type.class), Mockito.any(City.class))).thenReturn(getHomes());
         when(typeRepository.searchType(1)).thenReturn(getType());
 
-        this.mockMvc.perform(post("/v1/homes/search").content(body.toString())).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString(search.getHomes().get(0).getCity())))
+        this.mockMvc.perform(post("/v1/homes/search").content(body.toString())).andExpect(status().isOk()).andExpect(content().string(containsString(search.getHomes().get(0).getCity())))
                 .andExpect(content().string(containsString(search.getHomes().get(0).getThumbnail())))
                 .andExpect(content().string(containsString(search.getHomes().get(0).getLocation().getAddress())))
                 .andExpect(content().string(containsString(search.getHomes().get(0).getLocation().getLatitude())));
@@ -82,7 +82,21 @@ public class HomeControllerTest {
     public void removeBookingTest() throws Exception {
         JsonObject body = new JsonObject();
         body.addProperty("bookingId", "157");
-        this.mockMvc.perform(delete("/v1/homes/removeBooking").content(body.toString()).header("token", "token")).andDo(print()).andExpect(status().isOk());
+        this.mockMvc.perform(delete("/v1/homes/removeBooking").content(body.toString()).header("token", "token")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void bookingTest() throws Exception {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("checkIn", "26-05-2018");
+        jsonObject.addProperty("checkOut", "29-05-2018");
+        jsonObject.addProperty("id", "1");
+        this.mockMvc.perform(post("/v1/homes/booking").content(jsonObject.toString()).header("token", "token")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void myBookingTest() throws Exception {
+        this.mockMvc.perform(post("/v1/homes/myBooking").header("token", "token")).andExpect(status().isOk());
     }
 
     private City getCity() {
